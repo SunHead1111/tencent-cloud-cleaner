@@ -88,19 +88,11 @@ clean_so_files() {
 stop_processes() {
     log "停止腾讯云相关进程 ..."
 
-    # 先用官方卸载脚本(如果存在)
-    [ -x /usr/local/qcloud/YunJing/uninst.sh ] && {
-        log "  执行 YunJing 官方卸载脚本"
-        /usr/local/qcloud/YunJing/uninst.sh 2>/dev/null || true
-    }
-    [ -x /usr/local/qcloud/stargate/admin/uninstall.sh ] && {
-        log "  执行 stargate 官方卸载脚本"
-        /usr/local/qcloud/stargate/admin/uninstall.sh 2>/dev/null || true
-    }
-    [ -x /usr/local/qcloud/monitor/barad/admin/uninstall.sh ] && {
-        log "  执行 barad 官方卸载脚本"
-        /usr/local/qcloud/monitor/barad/admin/uninstall.sh 2>/dev/null || true
-    }
+    # 跳过官方卸载脚本(YunJing uninst.sh 需要交互输入验证码，直接强杀)
+    # 停止 stargate
+    /usr/local/qcloud/stargate/admin/stop.sh 2>/dev/null || true
+    # 停止 YunJing
+    /usr/local/qcloud/YunJing/stopYDCore.sh 2>/dev/null || true
 
     # 强杀残留进程
     local procs="sgagent barad_agent YDService YDLive YDEdr tat_agent cosfs"
