@@ -88,13 +88,8 @@ clean_so_files() {
 stop_processes() {
     log "停止腾讯云相关进程 ..."
 
-    # 跳过官方卸载脚本(YunJing uninst.sh 需要交互输入验证码，直接强杀)
-    # 停止 stargate
-    /usr/local/qcloud/stargate/admin/stop.sh 2>/dev/null || true
-    # 停止 YunJing
-    /usr/local/qcloud/YunJing/stopYDCore.sh 2>/dev/null || true
-
-    # 强杀残留进程
+    # 不调用任何官方脚本(uninst.sh要验证码, stopYDCore.sh内部调YDService -kill也可能卡住)
+    # 全部直接 pkill -9 强杀
     local procs="sgagent barad_agent YDService YDLive YDEdr tat_agent cosfs"
     for p in $procs; do
         if pgrep -x "$p" > /dev/null 2>&1; then
