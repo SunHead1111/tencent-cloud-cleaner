@@ -26,13 +26,13 @@ One-script solution to completely remove **all** Tencent Cloud monitoring agents
 ## Usage
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/yuwan027/tencent-cloud-cleaner/main/clean_tencent.sh | bash
+curl -fsSL https://raw.githubusercontent.com/SunHead1111/tencent-cloud-cleaner/main/clean_tencent.sh | bash
 ```
 
 Or manually:
 
 ```bash
-wget -O clean_tencent.sh https://raw.githubusercontent.com/yuwan027/tencent-cloud-cleaner/main/clean_tencent.sh
+wget -O clean_tencent.sh https://raw.githubusercontent.com/SunHead1111/tencent-cloud-cleaner/main/clean_tencent.sh
 chmod +x clean_tencent.sh
 ./clean_tencent.sh
 ```
